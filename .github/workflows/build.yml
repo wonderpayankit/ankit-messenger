@@ -25,7 +25,7 @@ jobs:
 
       - name: Build executable with PyInstaller
         run: |
-          pyinstaller --onefile --windowed --arch x86_64 main.py || { echo 'PyInstaller failed'; exit 1; }  # Error logging
+          pyinstaller --onefile --windowed main.py || { echo 'PyInstaller failed'; exit 1; }  # Error logging
 
       - name: Upload executable
         uses: actions/upload-artifact@v4
