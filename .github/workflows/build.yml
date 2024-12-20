@@ -31,7 +31,7 @@ jobs:
         run: ls dist/  # Verify the executable is created
 
       - name: Upload executable
-        uses: actions/upload-artifact@v3  # Updated to the latest version
+        uses: actions/upload-artifact@v4  # Updated to the latest version (v4)
         with:
           name: executable
           path: dist/main  # This is where the executable will be stored
