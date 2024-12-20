@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import filedialog
 
 # Function to create the user interface (UI)
 def create_ui():
@@ -10,6 +11,11 @@ def create_ui():
     name_label.pack(pady=5)
     name_entry = tk.Entry(root)
     name_entry.pack(pady=5)
+
+    # Listbox to show discovered users
+    user_listbox = tk.Listbox(root, height=10, width=40)
+    user_listbox.pack(pady=5)
+    user_listbox.insert(tk.END, "Discovering users...")
 
     # Message display area
     message_display = tk.Text(root, height=15, width=50)
@@ -29,4 +35,4 @@ def create_ui():
     file_button.pack(pady=5)
 
     # Return all necessary UI elements
-    return root, message_display, message_entry, send_button, file_button, name_entry
+    return root, message_display, message_entry, send_button, file_button, name_entry, user_listbox
