@@ -27,6 +27,9 @@ jobs:
         run: |
           pyinstaller --onefile --windowed main.py  # Package your Python script
 
+      - name: List files in dist directory
+        run: ls dist/  # Verify the executable is created
+
       - name: Upload executable
         uses: actions/upload-artifact@v3  # Updated to the latest version
         with:
