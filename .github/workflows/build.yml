@@ -3,35 +3,32 @@ name: Build Executable with PyInstaller
 on:
   push:
     branches:
-      - main  # This triggers the action when you push to the 'main' branch
+      - main  # Trigger when changes are pushed to the 'main' branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    runs-on: windows-latest  # Use a Windows runner (64-bit)
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Check out the code in the repository
+        uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Specify the Python version you want to use
+          python-version: '3.x'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyinstaller  # Install PyInstaller for creating executables
+          pip install pyinstaller
 
       - name: Build executable with PyInstaller
         run: |
-          pyinstaller --onefile --windowed main.py  # Package your Python script
-
-      - name: List files in dist directory
-        run: ls dist/  # Verify the executable is created
+          pyinstaller --onefile --windowed --arch x86_64 main.py
 
       - name: Upload executable
-        uses: actions/upload-artifact@v4  # Updated to the latest version (v4)
+        uses: actions/upload-artifact@v4
         with:
           name: executable
-          path: dist/main  # This is where the executable will be stored
+          path: dist/main.exe  # Path to the Windows executable
