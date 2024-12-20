@@ -1,37 +1,32 @@
 import tkinter as tk
-import tkinter.filedialog
 
+# Function to create the user interface (UI)
 def create_ui():
-    # Set up the main window
     root = tk.Tk()
-    root.title("Ankit Messenger")
+    root.title("Ankit Massanger")
 
-    # Add a text box to display the messages
-    text_box = tk.Text(root, width=50, height=15, state='disabled')
-    text_box.pack(padx=10, pady=10)
+    # Name input field
+    name_label = tk.Label(root, text="Enter your name:")
+    name_label.pack(pady=5)
+    name_entry = tk.Entry(root)
+    name_entry.pack(pady=5)
 
-    # Add an entry box to type messages
+    # Message display area
+    message_display = tk.Text(root, height=15, width=50)
+    message_display.pack(pady=5)
+    message_display.config(state=tk.DISABLED)  # Make text widget non-editable
+
+    # Message input field
     message_entry = tk.Entry(root, width=40)
-    message_entry.pack(padx=10, pady=10)
+    message_entry.pack(pady=5)
 
-    # Add a send button
+    # Send button
     send_button = tk.Button(root, text="Send")
-    send_button.pack(padx=10, pady=10)
+    send_button.pack(pady=5)
 
-    # Add a button to send files
+    # File send button (optional)
     file_button = tk.Button(root, text="Send File")
-    file_button.pack(padx=10, pady=10)
+    file_button.pack(pady=5)
 
-    # Add a button to receive files
-    receive_file_button = tk.Button(root, text="Receive File")
-    receive_file_button.pack(padx=10, pady=10)
-
-    # Function to update the display with new messages
-    def update_message_display(message):
-        text_box.config(state='normal')
-        text_box.insert(tk.END, message + "\n")
-        text_box.config(state='disabled')
-        text_box.yview(tk.END)
-
-    # Return necessary components for use in main.py
-    return root, message_entry, send_button, update_message_display, file_button, receive_file_button
+    # Return all necessary UI elements
+    return root, message_display, message_entry, send_button, file_button, name_entry
