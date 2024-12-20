@@ -1,6 +1,7 @@
 import socket
 import threading
 import tkinter as tk
+from tkinter import filedialog
 from ui import create_ui
 from file_transfer import send_file, receive_file
 
@@ -63,12 +64,18 @@ def start_client():
 def discover_devices():
     global discovered_users
     while True:
+        # Send broadcast message to all devices
         client_socket.sendto(f"DISCOVER:{user_name}".encode('utf-8'), (SERVER_IP, SERVER_PORT))
-        message, address = client_socket.recvfrom(1024)
-        if message.decode('utf-8').startswith("DISCOVER_REPLY"):
-            device_name = message.decode('utf-8').split(":")[1]
-            discovered_users[device_name] = address[0]
-            user_listbox.insert(tk.END, device_name)
+        try:
+            # Wait for a reply
+            message, address = client_socket.recvfrom(1024)
+            if message.decode('utf-8').startswith("DISCOVER_REPLY"):
+                device_name = message.decode('utf-8').split(":")[1]
+                if device_name not in discovered_users:
+                    discovered_users[device_name] = address[0]
+                    user_listbox.insert(tk.END, device_name)
+        except socket.timeout:
+            continue
 
 # Function to send file
 def send_file_dialog(event=None):
