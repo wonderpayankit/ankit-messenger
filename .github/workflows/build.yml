@@ -28,7 +28,7 @@ jobs:
           pyinstaller --onefile --windowed main.py  # Package your Python script
 
       - name: Upload executable
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Updated to the latest version
         with:
           name: executable
           path: dist/main  # This is where the executable will be stored
